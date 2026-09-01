@@ -46,7 +46,22 @@ The current server exposes much more than the old four tools: catalog search acr
 
 ## Install as a plugin
 
-This repository is also packaged as an agent plugin (MCP server + a UI skill):
+This repository is also packaged as an agent plugin (MCP server + a UI skill). You don't need to wait for any store — this repo IS a marketplace, add it directly:
+
+```bash
+# Claude Code
+claude plugin marketplace add 21st-dev/magic-mcp   # then: /plugin install 21st
+
+# Grok Build
+grok plugin marketplace add 21st-dev/magic-mcp && grok plugin install 21st --trust
+
+# Codex CLI
+codex plugin marketplace add 21st-dev/magic-mcp    # then install "21st" from /plugins
+```
+
+Set your API key in the `API_KEY_21ST` variable (free key at [21st.dev/mcp](https://21st.dev/mcp)).
+
+Store listings:
 
 - **Cursor / Grok Bot** — install "21st" from the [Cursor Marketplace](https://cursor.com/marketplace), then set your `API_KEY_21ST` under **Plugins → Configure**. Get a key at [21st.dev/mcp](https://21st.dev/mcp).
 - **Grok Build** — `grok plugin install 21st --trust` (from the official [xAI marketplace](https://github.com/xai-org/plugin-marketplace)), then export `API_KEY_21ST`.
