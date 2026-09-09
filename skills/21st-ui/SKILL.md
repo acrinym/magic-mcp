@@ -31,11 +31,12 @@ Notes:
 
 When nothing in the catalog fits or the user explicitly wants custom UI:
 
-1. `generate` with a precise prompt: purpose, layout, content, style references, and stack constraints.
-2. It returns variant(s); present them and let the user pick before integrating.
-3. `get_inspiration` is the lighter option when the user wants references/direction rather than final code.
+1. Check `get_usage.aiGenerationEnabled` and the current `tools/list`. Paid component access alone does not enable hosted AI. Missing or unknown status is not permission to generate.
+2. With AI off, use `search` and `get_component`, then implement or adapt the UI with your own coding agent. Do not call generation tools, legacy builder/refiner aliases, or the CLI as a workaround.
+3. When AI is enabled and `generate` is listed, call it with the purpose, layout, content, style, and stack constraints. It consumes AI credits and returns a preview URL; open that URL to view the generation.
+4. For existing sketch drafts, use `get_generation` and `get_take` to read their code. These reads remain available with AI off.
 
-AI generation consumes 21st.dev credits.
+If a cached call returns `ai_subscription_required`, stop generation attempts. After enabling AI, refresh the tool list or reconnect before trying again. The entitlement flag does not report the remaining credit balance.
 
 ## Logos
 

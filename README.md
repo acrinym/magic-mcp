@@ -27,9 +27,25 @@ Get an API key at [21st.dev/mcp](https://21st.dev/mcp).
 
 ## What this package does now (v0.2.0+)
 
-`npx -y @21st-dev/magic@latest API_KEY="..."` still works: since v0.2.0 it is a small stdio proxy that forwards every MCP message to the 21st MCP server. Existing `mcp.json` entries that reference `@21st-dev/magic` keep functioning — but they now speak to the same server as the 21st CLI, with the full current toolset.
+`npx -y @21st-dev/magic@latest API_KEY="..."` still works: since v0.2.0 it is a small stdio proxy that forwards every MCP message to the 21st MCP server. Existing `mcp.json` entries that reference `@21st-dev/magic` keep functioning — but they now speak to the same server as the 21st CLI, with the tools available to the authenticated account.
 
 The API key is accepted in all the historical forms: positional `API_KEY="..."`, `--API_KEY=...`, `/API_KEY:...`, `-API_KEY ...`, or the `TWENTY_FIRST_API_KEY` / `API_KEY_21ST` environment variables.
+
+## AI access
+
+Builder component access does not enable hosted 21st AI. The server lists
+`generate` and `iterate_generation` only when AI access is enabled. Check
+`get_usage.aiGenerationEnabled`; this reports access, not the remaining AI
+credit balance. With AI off, use `search` and `get_component`, then adapt the
+code with your own coding agent. Existing drafts remain readable.
+
+A cached or legacy generation call can return `ai_subscription_required`. Do
+not retry until AI is enabled. Refresh the client tool list or reconnect after
+enabling AI. The proxy forwards discovery to the server, so existing proxy
+versions receive this behavior without an npm update.
+
+`server.json` mirrors the official `dev.21st/mcp` registry listing. The registry
+version is independent of this compatibility package version.
 
 ## Old tool names → new tool names
 
@@ -42,7 +58,7 @@ The 21st MCP still accepts the legacy Magic tool names and translates them, so a
 | `21st_magic_component_refiner` | `generate` (new generation from the refinement prompt) |
 | `logo_search` | `search_logo` (one query per call) |
 
-The current server exposes much more than the old four tools: catalog search across components/themes/templates, paid code retrieval, bookmarks, team libraries, UI generation with variants, profile management, and more. Connect and call `tools/list` to see the full set.
+The current server exposes much more than the old four tools: catalog search across components/themes/templates, paid code retrieval, bookmarks, team libraries, UI generation with variants, profile management, and more. Connect and call `tools/list` to see the tools available to your account.
 
 ## Install as a plugin
 
@@ -81,4 +97,4 @@ The plugin config expects the API key in the `API_KEY_21ST` variable in every cl
 The Magic backend (`magic.21st.dev`) was superseded by the unified 21st MCP, and all old API keys were reset for security. Update to a fresh key from [21st.dev/mcp](https://21st.dev/mcp) — your existing `@21st-dev/magic` config will then work again through this compatibility proxy, though we recommend switching to `npx @21st-dev/cli@latest init`.
 
 **Is `/ui` still a thing?**
-Use natural language: ask your agent to search 21st for components (`search`), or generate new UI (`generate`). The old `/ui`, `/21` trigger phrases were a convention of the legacy tools' descriptions, not the protocol.
+Use natural language: ask your agent to search 21st for components (`search`), or use hosted UI generation (`generate`) when AI is enabled. The old `/ui`, `/21` trigger phrases were a convention of the legacy tools' descriptions, not the protocol.

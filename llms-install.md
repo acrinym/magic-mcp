@@ -44,3 +44,11 @@ Get a key at https://21st.dev/mcp. Old Magic keys (from the retired Magic consol
 ## Tool names
 
 Legacy Magic tool names (`21st_magic_component_builder`, `21st_magic_component_inspiration`, `21st_magic_component_refiner`, `logo_search`) are still accepted and translated server-side. The current names are `generate`, `get_inspiration`, `search`, `get_component`, `search_logo`, and more — call `tools/list` for the full set.
+
+## Account capabilities
+
+Tool discovery requires authentication and reflects the account's AI access.
+Check `get_usage.aiGenerationEnabled` before hosted generation. Builder with
+AI off supports component search and retrieval; use your own coding agent to
+adapt that code. Do not retry `ai_subscription_required` through legacy aliases
+or the CLI. Refresh tools or reconnect after enabling AI.

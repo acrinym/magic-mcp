@@ -17,7 +17,7 @@
 
 import { createInterface } from "node:readline";
 
-const VERSION = "0.2.2";
+const VERSION = "0.2.3";
 const DEFAULT_ENDPOINT = "https://21st.dev/api/mcp";
 
 // ---------------------------------------------------------------------------
